@@ -31,7 +31,7 @@ public class MenuItemAddedEventListenerTest {
     public void addsNewMenuItem() throws Exception {
         String id = randomUUID().toString();
 
-        listener.on(new MenuItemAddedEvent(id, "Saag Paneer", new BigDecimal(10)));
+        listener.on(new MenuItemAddedEvent(id, "Pepperoni", new BigDecimal(10)));
         verify(menu).save(refEq(new MenuItem(id, new BigDecimal(10))));
     }
 }
