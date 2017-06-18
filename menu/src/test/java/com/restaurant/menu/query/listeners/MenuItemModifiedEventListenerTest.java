@@ -3,7 +3,6 @@ package com.restaurant.menu.query.listeners;
 import com.restaurant.menu.events.MenuItemModifiedEvent;
 import com.restaurant.menu.query.Item;
 import com.restaurant.menu.query.ItemRepository;
-import com.restaurant.menu.query.listeners.MenuItemModifiedEventListener;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -31,10 +30,10 @@ public class MenuItemModifiedEventListenerTest {
     @Test
     public void updatesAnExistingItem() throws Exception {
         String id = randomUUID().toString();
-        when(items.findOne(id)).thenReturn(new Item(id, "Saag Paneer", new BigDecimal(10)));
+        when(items.findOne(id)).thenReturn(new Item(id, "Pepperoni", new BigDecimal(10)));
 
-        listener.on(new MenuItemModifiedEvent(id, "Authentic Saag Paneer", new BigDecimal(12)));
-        verify(items).save(refEq(new Item(id, "Authentic Saag Paneer", new BigDecimal(12))));
+        listener.on(new MenuItemModifiedEvent(id, "Ultimate Pepperoni", new BigDecimal(12)));
+        verify(items).save(refEq(new Item(id, "Ultimate Pepperoni", new BigDecimal(12))));
     }
 
     @Test
@@ -42,7 +41,7 @@ public class MenuItemModifiedEventListenerTest {
         String id = randomUUID().toString();
         when(items.findOne(id)).thenReturn(null);
 
-        listener.on(new MenuItemModifiedEvent(id, "Authentic Saag Paneer", new BigDecimal(12)));
+        listener.on(new MenuItemModifiedEvent(id, "Ultimate Pepperoni", new BigDecimal(12)));
         verify(items, never()).save(any(Item.class));
     }
 }

@@ -35,10 +35,10 @@ public class ItemAddedToOrderEventListenerTest {
         String menuItemId = randomUUID().toString();
         BigDecimal price = new BigDecimal(8.2);
 
-        Item item = new Item(menuItemId, "Saag Paneer", price, 5);
+        Item item = new Item(menuItemId, "Pepperoni", price, 5);
         when(items.findOne(menuItemId)).thenReturn(item);
 
         listener.on(new ItemAddedToOrderEvent(orderId, orderItemId, menuItemId, price, 2));
-        verify(items).save(refEq(new Item(menuItemId, "Saag Paneer", price, 6)));
+        verify(items).save(refEq(new Item(menuItemId, "Pepperoni", price, 6)));
     }
 }

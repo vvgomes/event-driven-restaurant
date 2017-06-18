@@ -3,7 +3,6 @@ package com.restaurant.menu.query.listeners;
 import com.restaurant.menu.events.MenuItemRemovedEvent;
 import com.restaurant.menu.query.Item;
 import com.restaurant.menu.query.ItemRepository;
-import com.restaurant.menu.query.listeners.MenuItemRemovedEventListener;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -32,10 +31,10 @@ public class MenuItemRemovedEventListenerTest {
     @Test
     public void deletesAnExistingItem() throws Exception {
         String id = randomUUID().toString();
-        when(items.findOne(id)).thenReturn(new Item(id, "Saag Paneer", new BigDecimal(10)));
+        when(items.findOne(id)).thenReturn(new Item(id, "Pepperoni", new BigDecimal(10)));
 
         listener.on(new MenuItemRemovedEvent(id));
-        verify(items).delete(refEq(new Item(id, "Saag Paneer", new BigDecimal(10))));
+        verify(items).delete(refEq(new Item(id, "Pepperoni", new BigDecimal(10))));
     }
 
     @Test

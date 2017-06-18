@@ -26,8 +26,8 @@ public class MenuItemTest {
 
         fixture
             .givenNoPriorActivity()
-            .when(new AddMenuItemCommand(id, "Saag Paneer", new BigDecimal(10)))
-            .expectEvents(new MenuItemAddedEvent(id, "Saag Paneer", new BigDecimal(10)));
+            .when(new AddMenuItemCommand(id, "Pepperoni", new BigDecimal(10)))
+            .expectEvents(new MenuItemAddedEvent(id, "Pepperoni", new BigDecimal(10)));
     }
 
     @Test
@@ -45,9 +45,9 @@ public class MenuItemTest {
         String id = randomUUID().toString();
 
         fixture
-            .given(new MenuItemAddedEvent(id, "Saag Paneer", new BigDecimal(10)))
-            .when(new ModifyMenuItemCommand(id, "Authentic Saag Paneer", new BigDecimal(12)))
-            .expectEvents(new MenuItemModifiedEvent(id, "Authentic Saag Paneer", new BigDecimal(12)));
+            .given(new MenuItemAddedEvent(id, "Pepperoni", new BigDecimal(10)))
+            .when(new ModifyMenuItemCommand(id, "Ultimate Pepperoni", new BigDecimal(12)))
+            .expectEvents(new MenuItemModifiedEvent(id, "Ultimate Pepperoni", new BigDecimal(12)));
     }
 
     @Test
@@ -55,7 +55,7 @@ public class MenuItemTest {
         String id = randomUUID().toString();
 
         fixture
-            .given(new MenuItemAddedEvent(id, "Saag Paneer", new BigDecimal(10)))
+            .given(new MenuItemAddedEvent(id, "Pepperoni", new BigDecimal(10)))
             .when(new ModifyMenuItemCommand(id, "", new BigDecimal(12)))
             .expectException(IllegalArgumentException.class);
     }
@@ -65,7 +65,7 @@ public class MenuItemTest {
         String id = randomUUID().toString();
 
         fixture
-            .given(new MenuItemAddedEvent(id, "Saag Paneer", new BigDecimal(10)))
+            .given(new MenuItemAddedEvent(id, "Pepperoni", new BigDecimal(10)))
             .when(new RemoveMenuItemCommand(id))
             .expectEvents(new MenuItemRemovedEvent(id));
     }
