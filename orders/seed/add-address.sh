@@ -1,4 +1,6 @@
+#!/usr/bin/env bash
+
 curl  \
-  --data '{"quantity":1, "menuItem":""}' \
+  --data '{"address": ""}' \
   -H 'Content-Type:application/json'
 echo
