@@ -22,7 +22,7 @@ public class CustomersApplication {
 
     @Bean
     public Exchange exchange(@Value("${axon.amqp.exchange}") String name) {
-        Exchange exchange = ExchangeBuilder.topicExchange(name).durable(true).build();
+        Exchange exchange = ExchangeBuilder.fanoutExchange(name).build();
         admin.declareExchange(exchange);
         return exchange;
     }
