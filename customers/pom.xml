@@ -54,17 +54,17 @@
 		<dependency>
 			<groupId>org.axonframework</groupId>
 			<artifactId>axon-spring-boot-starter</artifactId>
-			<version>3.0-RC1</version>
+			<version>3.0.5</version>
 		</dependency>
 		<dependency>
 			<groupId>org.axonframework</groupId>
 			<artifactId>axon-amqp</artifactId>
-			<version>3.0-RC1</version>
+			<version>3.0.5</version>
 		</dependency>
 		<dependency>
 			<groupId>org.axonframework</groupId>
 			<artifactId>axon-test</artifactId>
-			<version>3.0-RC1</version>
+			<version>3.0.5</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
