@@ -30,7 +30,7 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 public class AddressesCommandsController implements ResourceProcessor<RepositoryLinksResource> {
 
     @Autowired
-    CommandGateway commander;
+    CommandGateway commandGateway;
 
     @Autowired
     EntityLinks links;
@@ -42,7 +42,7 @@ public class AddressesCommandsController implements ResourceProcessor<Repository
         String nickName = body.getNickName();
 
         FutureCallback<AddAddressCommand, Object> callback = new FutureCallback<>();
-        commander.send(new AddAddressCommand(customerId, addressId, nickName, location), callback);
+        commandGateway.send(new AddAddressCommand(customerId, addressId, nickName, location), callback);
 
         return callback
             .thenApply(v -> links.linkForSingleResource(Address.class, addressId).withSelfRel().getHref())

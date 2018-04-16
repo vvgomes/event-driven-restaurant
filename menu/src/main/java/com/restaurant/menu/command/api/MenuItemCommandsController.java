@@ -29,7 +29,7 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 public class MenuItemCommandsController implements ResourceProcessor<RepositoryLinksResource> {
 
     @Autowired
-    CommandGateway commander;
+    CommandGateway commandGateway;
 
     @PostMapping("/modify")
     public Future<?> modifyMenuItem(@PathVariable String id, @RequestBody MenuItemRequestBody body) {
@@ -37,14 +37,14 @@ public class MenuItemCommandsController implements ResourceProcessor<RepositoryL
         BigDecimal price = body.getPrice();
 
         FutureCallback<ModifyMenuItemCommand, Object> callback = new FutureCallback<>();
-        commander.send(new ModifyMenuItemCommand(id, description, price), callback);
+        commandGateway.send(new ModifyMenuItemCommand(id, description, price), callback);
         return callback.toCompletableFuture();
     }
 
     @PostMapping("/remove")
     public Future<?> removeMenuItem(@PathVariable String id) {
         FutureCallback<ModifyMenuItemCommand, Object> callback = new FutureCallback<>();
-        commander.send(new RemoveMenuItemCommand(id));
+        commandGateway.send(new RemoveMenuItemCommand(id));
         return callback.toCompletableFuture();
     }
 

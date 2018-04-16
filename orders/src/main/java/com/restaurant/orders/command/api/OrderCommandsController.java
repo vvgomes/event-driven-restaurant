@@ -34,7 +34,7 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 public class OrderCommandsController implements ResourceProcessor<RepositoryLinksResource> {
 
     @Autowired
-    CommandGateway commander;
+    CommandGateway commandGateway;
 
     @Autowired
     AddressRepository addresses;
@@ -48,21 +48,21 @@ public class OrderCommandsController implements ResourceProcessor<RepositoryLink
             .orElseThrow(AddressNotFoundException::new);
 
         FutureCallback<AddDeliveryAddressToOrderCommand, Object> callback = new FutureCallback<>();
-        commander.send(new AddDeliveryAddressToOrderCommand(id, addressId), callback);
+        commandGateway.send(new AddDeliveryAddressToOrderCommand(id, addressId), callback);
         return callback.toCompletableFuture();
     }
 
     @PostMapping("/cancel")
     public Future<?> cancel(@PathVariable String id) {
         FutureCallback<CancelOrderCommand, Object> callback = new FutureCallback<>();
-        commander.send(new CancelOrderCommand(id), callback);
+        commandGateway.send(new CancelOrderCommand(id), callback);
         return callback.toCompletableFuture();
     }
 
     @PostMapping("/place")
     public Future<?> place(@PathVariable String id) {
         FutureCallback<PlaceOrderCommand, Object> callback = new FutureCallback<>();
-        commander.send(new PlaceOrderCommand(id), callback);
+        commandGateway.send(new PlaceOrderCommand(id), callback);
         return callback.toCompletableFuture();
     }
 

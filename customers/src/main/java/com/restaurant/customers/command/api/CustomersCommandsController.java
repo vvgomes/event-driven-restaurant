@@ -31,7 +31,7 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 public class CustomersCommandsController implements ResourceProcessor<RepositoryLinksResource> {
 
     @Autowired
-    CommandGateway commander;
+    CommandGateway commandGateway;
 
     @Autowired
     EntityLinks links;
@@ -42,7 +42,7 @@ public class CustomersCommandsController implements ResourceProcessor<Repository
         String id = generateId(email);
 
         FutureCallback<SignUpCustomerCommand, Object> callback = new FutureCallback<>();
-        commander.send(new SignUpCustomerCommand(id, email), callback);
+        commandGateway.send(new SignUpCustomerCommand(id, email), callback);
 
         return callback
             .thenApply(v -> links.linkForSingleResource(Customer.class, id).withSelfRel().getHref())

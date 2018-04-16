@@ -29,12 +29,12 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 public class OrderItemCommandsController implements ResourceProcessor<RepositoryLinksResource> {
 
     @Autowired
-    CommandGateway commander;
+    CommandGateway commandGateway;
 
     @PostMapping("/remove")
     public Future<?> remove(@PathVariable String orderId, @PathVariable String id) {
         FutureCallback<RemoveItemFromOrderCommand, Object> callback = new FutureCallback<>();
-        commander.send(new RemoveItemFromOrderCommand(orderId, id), callback);
+        commandGateway.send(new RemoveItemFromOrderCommand(orderId, id), callback);
         return callback.toCompletableFuture();
     }
 

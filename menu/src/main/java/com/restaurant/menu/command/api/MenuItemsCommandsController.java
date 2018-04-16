@@ -31,7 +31,7 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 public class MenuItemsCommandsController implements ResourceProcessor<RepositoryLinksResource> {
 
     @Autowired
-    CommandGateway commander;
+    CommandGateway commandGateway;
 
     @Autowired
     EntityLinks links;
@@ -43,7 +43,7 @@ public class MenuItemsCommandsController implements ResourceProcessor<Repository
         BigDecimal price = body.getPrice();
 
         FutureCallback<AddMenuItemCommand, Object> callback = new FutureCallback<>();
-        commander.send(new AddMenuItemCommand(id, description, price), callback);
+        commandGateway.send(new AddMenuItemCommand(id, description, price), callback);
 
         return callback
             .thenApply(v -> links.linkForSingleResource(Item.class, id).withSelfRel().getHref())

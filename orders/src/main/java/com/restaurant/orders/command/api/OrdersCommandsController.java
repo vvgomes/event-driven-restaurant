@@ -35,7 +35,7 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 public class OrdersCommandsController implements ResourceProcessor<RepositoryLinksResource> {
 
     @Autowired
-    CommandGateway commander;
+    CommandGateway commandGateway;
 
     @Autowired
     CustomerRepository customers;
@@ -53,7 +53,7 @@ public class OrdersCommandsController implements ResourceProcessor<RepositoryLin
             .orElseThrow(CustomerNotFoundException::new);
 
         FutureCallback<OpenOrderCommand, Object> callback = new FutureCallback<>();
-        commander.send(new OpenOrderCommand(id, customerId), callback);
+        commandGateway.send(new OpenOrderCommand(id, customerId), callback);
 
         return callback
             .thenApply(v -> links.linkForSingleResource(Order.class, id).withSelfRel().getHref())

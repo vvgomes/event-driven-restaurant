@@ -35,7 +35,7 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 public class OrderItemsCommandsController implements ResourceProcessor<RepositoryLinksResource> {
 
     @Autowired
-    CommandGateway commander;
+    CommandGateway commandGateway;
 
     @Autowired
     MenuItemRepository menuItems;
@@ -55,7 +55,7 @@ public class OrderItemsCommandsController implements ResourceProcessor<Repositor
             .getPrice();
 
         FutureCallback<AddItemToOrderCommand, Object> callback = new FutureCallback<>();
-        commander.send(new AddItemToOrderCommand(orderId, orderItemId, menuItemId, price, quantity), callback);
+        commandGateway.send(new AddItemToOrderCommand(orderId, orderItemId, menuItemId, price, quantity), callback);
 
         return callback
             .thenApply(v -> links.linkForSingleResource(OrderItem.class, orderItemId).withSelfRel().getHref())

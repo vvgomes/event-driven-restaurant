@@ -27,7 +27,7 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 public class CustomerCommandsController implements ResourceProcessor<RepositoryLinksResource> {
 
     @Autowired
-    CommandGateway commander;
+    CommandGateway commandGateway;
 
     @PostMapping("/change-email")
     public Future<?> changeEmail(@PathVariable String id, @RequestBody Map<String, String> body) {
